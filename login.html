@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChatMate • Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="card">
+        <div class="brand">
+          <div class="logo">CM</div>
+          <div>
+            <div class="brand-title">ChatMate</div>
+            <div class="brand-subtitle">Sign in to start chatting</div>
+          </div>
+        </div>
+
+        {% if error %}
+          <div class="alert">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" class="form">
+          <label class="label" for="username">Username</label>
+          <input
+            class="input"
+            id="username"
+            name="username"
+            placeholder="e.g. prathu"
+            autocomplete="username"
+            autofocus
+            required
+          />
+          <button class="btn primary" type="submit">Continue</button>
+        </form>
+      </div>
+      <div class="footer">Chat history is stored locally in SQLite.</div>
+    </div>
+  </body>
+</html>
