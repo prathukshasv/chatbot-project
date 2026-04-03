@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChatMate • Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="chat-shell">
+      <header class="chat-header">
+        <div class="left">
+          <div class="logo small">CM</div>
+          <div>
+            <div class="h-title">ChatMate</div>
+            <div class="h-subtitle">Logged in as <span class="pill">{{ user }}</span></div>
+          </div>
+        </div>
+        <div class="right">
+          <a class="btn" href="/clear">Clear history</a>
+          <a class="btn danger" href="/logout">Logout</a>
+        </div>
+      </header>
+
+      <main class="chat-main" id="chatMain">
+        {% if chats and chats|length > 0 %}
+          {% for message, response in chats %}
+            <div class="msg-row user">
+              <div class="bubble user">{{ message }}</div>
+            </div>
+            <div class="msg-row bot">
+              <div class="bubble bot">{{ response }}</div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="empty">
+            <div class="empty-title">Start a conversation</div>
+            <div class="empty-subtitle">Try “hi”, “time”, or ask a Wikipedia topic.</div>
+            <div class="empty-subtitle" id="voiceSupportNote"></div>
+          </div>
+        {% endif %}
+      </main>
+
+      <form class="chat-input" id="chatForm" autocomplete="off">
+        <input
+          class="input"
+          id="textInput"
+          name="msg"
+          placeholder="Type a message…"
+          required
+        />
+        <button class="btn" id="micBtn" type="button" title="Voice input">🎤</button>
+        <button class="btn primary" type="submit">Send</button>
+      </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+  </body>
+</html>
